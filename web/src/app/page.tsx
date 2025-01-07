@@ -46,13 +46,22 @@ export default function Home() {
   };
 
   useEffect(() => {
+    if (window.location.hash) {
+      const target = document.getElementById(window.location.hash.slice(1));
+      if (target) {
+        target.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  }, []);
+
+  useEffect(() => {
     if (resolvedTheme) {
       setIsThemeReady(true);
     }
   }, [resolvedTheme]);
 
   useEffect(() => {
-    setIsWalletConnected(!!address); // Update wallet connection state when address changes
+    setIsWalletConnected(!!address);
   }, [address]);
 
   if (!isThemeReady) return null;
@@ -122,7 +131,6 @@ export default function Home() {
                 )}
               </div>
             )}
-
         </section>
 
         {/* Services Section */}
@@ -149,7 +157,6 @@ export default function Home() {
               </div>
             ))}
           </div>
-
         </section>
 
         {/* Contact Us Section */}
